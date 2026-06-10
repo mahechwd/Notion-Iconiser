@@ -1,17 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>
-        Notion Iconiser
-    </title>
+    <title>Notion Iconiser</title>
 </head>
 <body>
     <h1>Notion Iconiser</h1>
+
+    <button 
+        id="uploadButton" 
+        type="button"
+        style="
+            width: 400px;
+            height: 250px;
+            font-size: 24px;
+            border: 2px dashed black;
+            border-radius: 20px;
+            background-color: white;
+            cursor: pointer;
+        "
+    >
+        <small><strong>Choose a file </strong>or drop image here.</small>
+
+        <br>
+
+        <small 
+            id="errorMessage" 
+            style="color: red;" 
+            hidden
+        >
+            Image must be a square
+        </small>
+    </button>
 
     <input 
         type="file" 
         id="imageInput" 
         accept="image/*"
+        hidden
     >
+
+    <p id="fileName"></p>
+
+    <img 
+        id="previewImage" 
+        alt="Uploaded image preview"
+        width="300"
+        hidden
+    >
+
+    <script src="script.js"></script>
 </body>
 </html>
