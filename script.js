@@ -1,7 +1,5 @@
 const uploadButton = document.getElementById("uploadButton");
 const imageInput = document.getElementById("imageInput");
-const fileName = document.getElementById("fileName");
-const previewImage = document.getElementById("previewImage");
 const errorMessage = document.getElementById("errorMessage");
 
 // Click button to choose image
@@ -52,18 +50,20 @@ function handleFile(file) {
 
         if (width !== height) {
             errorMessage.hidden = false;
-            fileName.textContent = "";
-            previewImage.hidden = true;
-            previewImage.src = "";
             imageInput.value = "";
             return;
         }
 
         errorMessage.hidden = true;
-        fileName.textContent = "Selected file: " + file.name;
 
-        previewImage.src = imageUrl;
-        previewImage.hidden = false;
+        const reader = new FileReader();
+
+        reader.onload = function () {
+            sessionStorage.setItem("uploadedImage", reader.result);
+            window.location.href = "editor.html";
+        };
+
+        reader.readAsDataURL(file);
     };
 
     image.src = imageUrl;
