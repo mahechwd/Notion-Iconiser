@@ -60,7 +60,7 @@ function handleFile(file) {
 
         reader.onload = function () {
             sessionStorage.setItem("uploadedImage", reader.result);
-            window.location.href = "editor.html";
+            window.location.href = "loading.html";
         };
 
         reader.readAsDataURL(file);

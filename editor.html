@@ -4,23 +4,32 @@
     <title>Preview Image</title>
 </head>
 <body>
-    <p id="statusText">Removing background...</p>
-
     <img 
         id="squareImage" 
         alt="Edited square image"
         style="width: 300px; height: 300px; object-fit: contain;"
-        hidden
     >
 
     <br><br>
 
-    <a id="downloadLink" download="iconised-image.png" hidden>
+    <a id="downloadLink" download="iconised-image.png">
         <button type="button">
             Download Image
         </button>
     </a>
 
-    <script type="module" src="editor.js"></script>
+    <script>
+        const squareImage = document.getElementById("squareImage");
+        const downloadLink = document.getElementById("downloadLink");
+
+        const editedImage = sessionStorage.getItem("editedImage");
+
+        if (editedImage) {
+            squareImage.src = editedImage;
+            downloadLink.href = editedImage;
+        } else {
+            window.location.href = "index.html";
+        }
+    </script>
 </body>
 </html>
