@@ -6,8 +6,8 @@
 <body>
     <img 
         id="squareImage" 
-        alt="Uploaded square image"
-        style="width: 300px; height: 300px; object-fit: cover;"
+        alt="Edited square image"
+        style="width: 300px; height: 300px; object-fit: contain;"
     >
 
     <br><br>
@@ -21,11 +21,12 @@
     <script>
         const squareImage = document.getElementById("squareImage");
         const downloadLink = document.getElementById("downloadLink");
-        const uploadedImage = sessionStorage.getItem("uploadedImage");
 
-        if (uploadedImage) {
-            squareImage.src = uploadedImage;
-            downloadLink.href = uploadedImage;
+        const editedImage = sessionStorage.getItem("editedImage");
+
+        if (editedImage) {
+            squareImage.src = editedImage;
+            downloadLink.href = editedImage;
         } else {
             window.location.href = "index.html";
         }
