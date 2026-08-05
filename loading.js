@@ -28,10 +28,12 @@ async function processImage() {
     } catch (error) {
         console.error("Image processing failed:", error);
 
-        document.body.innerHTML = `
-            <h1>Image processing failed</h1>
-            <p>Please try another image.</p>
-            <a href="index.html">Go back</a>
+        document.getElementById("processingCard").innerHTML = `
+            <div>
+                <p class="status">Image processing failed</p>
+                <p class="status-detail">Please try another image.</p>
+                <a class="primary-button" href="index.html">Go back</a>
+            </div>
         `;
     }
 }
