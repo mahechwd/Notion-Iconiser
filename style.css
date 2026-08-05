@@ -219,6 +219,21 @@ h1 {
 
 .processing-status.is-leaving { opacity: 0; transform: translateY(-5px); }
 
+.loading-dots { display: inline-flex; margin-left: 1px; }
+
+.loading-dots span {
+    opacity: .25;
+    animation: loading-dot 1.15s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(2) { animation-delay: .15s; }
+.loading-dots span:nth-child(3) { animation-delay: .3s; }
+
+@keyframes loading-dot {
+    0%, 60%, 100% { opacity: .25; transform: translateY(0); }
+    30% { opacity: 1; transform: translateY(-1px); }
+}
+
 .result-download {
     opacity: 0;
     transform: translateY(8px);

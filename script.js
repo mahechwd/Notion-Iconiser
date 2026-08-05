@@ -78,7 +78,7 @@ async function processImage(originalDataUrl) {
     processingImage.src = originalDataUrl;
     processingImage.hidden = false;
     processingStatus.hidden = false;
-    processingStatus.textContent = "Removing background…";
+    setProcessingStatus("Removing background");
     uploadButton.classList.add("is-processing");
 
     try {
@@ -110,7 +110,7 @@ async function processImage(originalDataUrl) {
         });
         const removedBackgroundBlob = await removeBackground(originalBlob);
 
-        processingStatus.textContent = "Colourising image…";
+        setProcessingStatus("Colourising image");
         const finishedImage = await colouriseImage(removedBackgroundBlob, "#d3d3d3");
         sessionStorage.setItem("editedImage", finishedImage);
 
@@ -133,7 +133,7 @@ async function showResult(finishedImage) {
     processingStatus.hidden = true;
     processingStatus.classList.remove("is-leaving");
 
-    pageTitle.textContent = "Your icon is ready";
+    pageTitle.textContent = "Your icon is ready!";
     pageDescription.textContent = "The background has been removed and the visible pixels have been converted to a neutral grey.";
     sectionTitle.textContent = "Preview";
     sectionDescription.textContent = "The checkerboard shows the transparent areas of your image.";
@@ -177,6 +177,22 @@ function setIntroVisible(visible) {
 function showError(message) {
     errorMessage.textContent = message;
     errorMessage.hidden = false;
+}
+
+function setProcessingStatus(message) {
+    processingStatus.replaceChildren(document.createTextNode(message));
+
+    const dots = document.createElement("span");
+    dots.className = "loading-dots";
+    dots.setAttribute("aria-hidden", "true");
+
+    for (let index = 0; index < 3; index += 1) {
+        const dot = document.createElement("span");
+        dot.textContent = ".";
+        dots.appendChild(dot);
+    }
+
+    processingStatus.appendChild(dots);
 }
 
 function readAsDataUrl(file) {
