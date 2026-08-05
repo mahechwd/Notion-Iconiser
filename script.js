@@ -8,10 +8,11 @@ const processingImage = document.getElementById("processingImage");
 const processingStatus = document.getElementById("processingStatus");
 const pageTitle = document.getElementById("pageTitle");
 const pageDescription = document.getElementById("pageDescription");
+const divider = document.querySelector(".divider");
 const sectionTitle = document.getElementById("sectionTitle");
 const sectionDescription = document.getElementById("sectionDescription");
 const resultDownload = document.getElementById("resultDownload");
-let processingLayoutTimer;
+let processingEntryAnimation;
 
 uploadButton.addEventListener("click", function () {
     if (!uploadButton.classList.contains("is-processing") && !uploadButton.classList.contains("is-complete")) {
@@ -73,10 +74,6 @@ function handleFile(file) {
 }
 
 async function processImage(originalDataUrl) {
-    setIntroVisible(false);
-    processingLayoutTimer = window.setTimeout(function () {
-        document.body.classList.add("processing-mode");
-    }, 350);
     uploadPrompt.hidden = true;
     processingImage.src = originalDataUrl;
     processingImage.hidden = false;
@@ -85,6 +82,29 @@ async function processImage(originalDataUrl) {
     uploadButton.classList.add("is-processing");
 
     try {
+        setIntroVisible(false);
+        await wait(90);
+
+        const uploadPosition = uploadButton.getBoundingClientRect();
+        const headerHeight = document.querySelector(".site-header").offsetHeight;
+        const targetLeft = (document.documentElement.clientWidth - uploadPosition.width) / 2;
+        const targetTop = headerHeight + (window.innerHeight - headerHeight - uploadPosition.height) / 2;
+        const horizontalOffset = targetLeft - uploadPosition.left;
+        const verticalOffset = targetTop - uploadPosition.top;
+
+        processingEntryAnimation = uploadButton.animate([
+            { transform: "translate(0, 0)" },
+            { transform: `translate(${horizontalOffset}px, ${verticalOffset}px)` }
+        ], {
+            duration: 550,
+            easing: "cubic-bezier(.2, .8, .2, 1)",
+            fill: "both"
+        });
+
+        await processingEntryAnimation.finished;
+        document.body.classList.add("processing-mode");
+        processingEntryAnimation.cancel();
+
         const originalBlob = await fetch(originalDataUrl).then(function (response) {
             return response.blob();
         });
@@ -105,7 +125,6 @@ async function processImage(originalDataUrl) {
 }
 
 async function showResult(finishedImage) {
-    window.clearTimeout(processingLayoutTimer);
     processingStatus.classList.add("is-leaving");
     processingImage.classList.add("is-changing");
     await wait(300);
@@ -150,7 +169,7 @@ async function showResult(finishedImage) {
 }
 
 function setIntroVisible(visible) {
-    [pageTitle, pageDescription, sectionTitle, sectionDescription].forEach(function (element) {
+    [pageTitle, pageDescription, divider, sectionTitle, sectionDescription].forEach(function (element) {
         element.classList.toggle("is-hidden", !visible);
     });
 }

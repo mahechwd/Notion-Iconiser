@@ -75,7 +75,6 @@ button, input { font: inherit; }
 }
 
 .processing-mode .content { width: 100%; }
-.processing-mode .upload-area.is-processing { transform: translateY(0); }
 
 .processing-mode #pageTitle,
 .processing-mode #pageDescription,
@@ -92,6 +91,7 @@ button, input { font: inherit; }
 
 #pageTitle,
 #pageDescription,
+.divider,
 #sectionTitle,
 #sectionDescription {
     transition: opacity .35s ease, transform .35s ease;
@@ -99,6 +99,7 @@ button, input { font: inherit; }
 
 #pageTitle.is-hidden,
 #pageDescription.is-hidden,
+.divider.is-hidden,
 #sectionTitle.is-hidden,
 #sectionDescription.is-hidden {
     opacity: 0;
@@ -169,7 +170,6 @@ h1 {
     border-color: var(--line);
     background: #1f1f1f;
     cursor: default;
-    transform: translateY(-18px);
 }
 
 .upload-area.is-complete {
