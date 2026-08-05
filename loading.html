@@ -1,12 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Processing Image</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing — Notion Iconiser</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <p>Processing image...</p>
-
+    <header class="site-header">
+        <a class="brand" href="index.html"><span class="brand-mark">N</span><span>Notion Iconiser</span></a>
+        <span class="header-label">Image tools</span>
+    </header>
+    <main class="page-shell">
+        <aside class="sidebar" aria-label="Page contents">
+            <p class="sidebar-title">In this tool</p>
+            <span class="sidebar-item">Upload an image</span>
+            <span class="sidebar-item active">Remove background</span>
+            <span class="sidebar-item">Download icon</span>
+        </aside>
+        <article class="content">
+            <p class="eyebrow">Image tools</p>
+            <h1>Preparing your icon</h1>
+            <p class="lede">We’re removing the background and applying the final colour.</p>
+            <div class="divider"></div>
+            <div class="loader-card" id="processingCard">
+                <div>
+                    <div class="spinner" aria-hidden="true"></div>
+                    <p class="status">Processing image…</p>
+                    <p class="status-detail">This may take a moment.</p>
+                </div>
+            </div>
+        </article>
+    </main>
     <script type="module" src="loading.js"></script>
 </body>
 </html>

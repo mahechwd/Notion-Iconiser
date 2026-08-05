@@ -16,18 +16,18 @@ imageInput.addEventListener("change", function () {
 // Allow image to be dropped onto button
 uploadButton.addEventListener("dragover", function (event) {
     event.preventDefault();
-    uploadButton.style.backgroundColor = "#f0f0f0";
+    uploadButton.classList.add("is-dragging");
 });
 
 // When drag leaves button
 uploadButton.addEventListener("dragleave", function () {
-    uploadButton.style.backgroundColor = "white";
+    uploadButton.classList.remove("is-dragging");
 });
 
 // When image is dropped onto button
 uploadButton.addEventListener("drop", function (event) {
     event.preventDefault();
-    uploadButton.style.backgroundColor = "white";
+    uploadButton.classList.remove("is-dragging");
 
     const file = event.dataTransfer.files[0];
     handleFile(file);

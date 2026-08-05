@@ -1,44 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notion Iconiser</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Notion Iconiser</h1>
-
-    <button 
-        id="uploadButton" 
-        type="button"
-        style="
-            width: 400px;
-            height: 250px;
-            font-size: 24px;
-            border: 2px dashed black;
-            border-radius: 20px;
-            background-color: white;
-            cursor: pointer;
-        "
-    >
-        <small><strong>Choose a file </strong>or drop image here.</small>
-
-        <br>
-
-        <small 
-            id="errorMessage" 
-            style="color: red;" 
-            hidden
-        >
-            Image must be a square
-        </small>
-    </button>
-
-    <input 
-        type="file" 
-        id="imageInput" 
-        accept="image/*"
-        hidden
-    >
-
+    <header class="site-header">
+        <a class="brand" href="index.html"><span class="brand-mark">N</span><span>Notion Iconiser</span></a>
+        <span class="header-label">Image tools</span>
+    </header>
+    <main class="page-shell">
+        <aside class="sidebar" aria-label="Page contents">
+            <p class="sidebar-title">In this tool</p>
+            <a class="sidebar-item active" href="#upload">Upload an image</a>
+            <span class="sidebar-item">Remove background</span>
+            <span class="sidebar-item">Download icon</span>
+        </aside>
+        <article class="content">
+            <p class="eyebrow">Image tools</p>
+            <h1>Create a Notion-ready icon</h1>
+            <p class="lede">Turn a square image into a clean, neutral icon with a transparent background.</p>
+            <div class="divider"></div>
+            <section id="upload">
+                <h2 class="section-title">Upload an image</h2>
+                <p class="section-copy">Choose a square image to begin. Your image will be processed automatically.</p>
+                <button class="upload-area" id="uploadButton" type="button">
+                    <span class="upload-icon" aria-hidden="true">↑</span>
+                    <span class="upload-title">Choose a file or drop it here</span>
+                    <span class="upload-hint">Square image files only</span>
+                    <span class="error" id="errorMessage" hidden>Image must be a square</span>
+                </button>
+                <input type="file" id="imageInput" accept="image/*" hidden>
+            </section>
+        </article>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
