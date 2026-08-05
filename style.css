@@ -6,6 +6,7 @@
     --hover: #efefed;
     --blue: #2383e2;
     --red: #eb5757;
+    --panel-size: 520px;
 }
 
 * { box-sizing: border-box; }
@@ -128,8 +129,8 @@ h1 {
 .section-copy { margin: 0 0 22px; color: var(--muted); font-size: 15px; line-height: 1.55; }
 
 .upload-area {
-    width: 100%;
-    min-height: 230px;
+    width: min(100%, var(--panel-size));
+    aspect-ratio: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -163,9 +164,10 @@ h1 {
 .error { margin-top: 4px; color: var(--red); font-size: 13px; }
 
 .preview-frame {
+    width: min(100%, var(--panel-size));
+    aspect-ratio: 1;
     display: grid;
     place-items: center;
-    min-height: 390px;
     padding: 42px;
     border: 1px solid var(--line);
     border-radius: 8px;
@@ -197,7 +199,8 @@ h1 {
 .primary-button:hover { background: #1a73c9; }
 
 .loader-card {
-    min-height: 250px;
+    width: min(100%, var(--panel-size));
+    aspect-ratio: 1;
     display: grid;
     place-items: center;
     padding: 40px;
@@ -229,6 +232,6 @@ h1 {
     .sidebar { display: none; }
     h1 { font-size: 43px; }
     .lede { font-size: 17px; }
-    .upload-area { min-height: 210px; padding: 28px 20px; }
-    .preview-frame { min-height: 330px; padding: 28px; }
+    .upload-area { padding: 28px 20px; }
+    .preview-frame { padding: 28px; }
 }
