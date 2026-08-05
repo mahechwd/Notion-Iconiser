@@ -6,7 +6,7 @@
     --hover: #efefed;
     --blue: #2383e2;
     --red: #eb5757;
-    --panel-size: 520px;
+    --panel-size: 360px;
 }
 
 * { box-sizing: border-box; }
@@ -64,9 +64,9 @@ button, input { font: inherit; }
     margin: 0 auto;
     display: grid;
     grid-template-columns: 230px minmax(0, 720px);
-    gap: 76px;
+    gap: 56px;
     justify-content: center;
-    padding: 64px 0 96px;
+    padding: 32px 0 48px;
 }
 
 .sidebar {
@@ -102,7 +102,7 @@ h1 {
     margin: 0;
     max-width: 650px;
     font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(44px, 6vw, 64px);
+    font-size: clamp(40px, 4.5vw, 48px);
     font-weight: 500;
     line-height: 1.05;
     letter-spacing: -.045em;
@@ -110,23 +110,23 @@ h1 {
 
 .lede {
     max-width: 650px;
-    margin: 24px 0 0;
+    margin: 16px 0 0;
     color: #494846;
-    font-size: 19px;
-    line-height: 1.55;
+    font-size: 17px;
+    line-height: 1.45;
     letter-spacing: -.012em;
 }
 
-.divider { height: 1px; margin: 42px 0; background: var(--line); }
+.divider { height: 1px; margin: 24px 0; background: var(--line); }
 
 .section-title {
-    margin: 0 0 10px;
-    font-size: 24px;
+    margin: 0 0 6px;
+    font-size: 21px;
     font-weight: 650;
     letter-spacing: -.025em;
 }
 
-.section-copy { margin: 0 0 22px; color: var(--muted); font-size: 15px; line-height: 1.55; }
+.section-copy { margin: 0 0 14px; color: var(--muted); font-size: 14px; line-height: 1.5; }
 
 .upload-area {
     width: min(100%, var(--panel-size));
@@ -183,7 +183,7 @@ h1 {
     align-items: center;
     justify-content: center;
     min-height: 38px;
-    margin-top: 22px;
+    margin-top: 14px;
     padding: 0 16px;
     border: 0;
     border-radius: 5px;
@@ -228,10 +228,10 @@ h1 {
 @media (max-width: 760px) {
     .site-header { height: 58px; padding: 0 18px; }
     .header-label { display: none; }
-    .page-shell { width: min(100% - 36px, 680px); grid-template-columns: 1fr; padding-top: 42px; }
+    .page-shell { width: min(100% - 36px, 680px); grid-template-columns: 1fr; padding: 32px 0 48px; }
     .sidebar { display: none; }
-    h1 { font-size: 43px; }
-    .lede { font-size: 17px; }
+    h1 { font-size: 38px; }
+    .lede { font-size: 16px; }
     .upload-area { padding: 28px 20px; }
     .preview-frame { padding: 28px; }
 }
