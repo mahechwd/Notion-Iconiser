@@ -3,12 +3,30 @@ from __future__ import annotations
 import modal
 
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024
+MAX_IMAGE_DIMENSION = 4096
+MAX_IMAGE_PIXELS = 16_777_216
 ALLOWED_IMAGE_TYPES = frozenset({"image/jpeg", "image/png", "image/webp"})
 
 app = modal.App("notion-iconiser-birefnet")
-runtime_image = (
+base_image = (
     modal.Image.debian_slim(python_version="3.11")
     .pip_install_from_requirements("backend/requirements.txt")
+)
+
+
+def download_model() -> None:
+    """Bake the model and its remote code into the image to shorten cold starts."""
+    from transformers import AutoModelForImageSegmentation
+
+    AutoModelForImageSegmentation.from_pretrained(
+        "ZhengPeng7/BiRefNet",
+        trust_remote_code=True,
+    )
+
+
+runtime_image = (
+    base_image
+    .run_function(download_model)
     .add_local_file("backend/model.py", remote_path="/root/model.py")
 )
 
@@ -67,9 +85,20 @@ def api():
 
         try:
             with Image.open(BytesIO(image_bytes)) as uploaded_image:
+                width, height = uploaded_image.size
                 uploaded_image.verify()
         except (UnidentifiedImageError, OSError):
             raise HTTPException(status_code=400, detail="The uploaded image is invalid.") from None
+
+        if (
+            width > MAX_IMAGE_DIMENSION
+            or height > MAX_IMAGE_DIMENSION
+            or width * height > MAX_IMAGE_PIXELS
+        ):
+            raise HTTPException(
+                status_code=413,
+                detail="The image dimensions must not exceed 4096 × 4096 pixels.",
+            )
 
         if remover is None:
             raise HTTPException(status_code=503, detail="The model is not ready.")
