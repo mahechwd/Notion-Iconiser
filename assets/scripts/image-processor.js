@@ -1,5 +1,3 @@
-import { removeBackground } from "https://cdn.jsdelivr.net/npm/@imgly/background-removal/+esm";
-
 export class ImageValidationError extends Error {
     constructor(code, message) {
         super(message);
@@ -31,7 +29,17 @@ export async function validateAndReadImage(file) {
 
 export async function createIcon(dataUrl, colour, onStageChange) {
     const sourceBlob = await fetch(dataUrl).then((response) => response.blob());
-    const transparentBlob = await removeBackground(sourceBlob);
+    const response = await fetch("/api/remove-background", {
+        method: "POST",
+        headers: { "Content-Type": sourceBlob.type },
+        body: sourceBlob
+    });
+
+    if (!response.ok) {
+        throw new Error(`Background removal failed with status ${response.status}.`);
+    }
+
+    const transparentBlob = await response.blob();
 
     onStageChange("colourise");
     return colouriseVisiblePixels(transparentBlob, colour);
